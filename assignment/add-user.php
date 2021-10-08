@@ -8,7 +8,7 @@
         // mysqli_stmt_bind_param($statement, 's', htmlspecialchars($_POST["password"]));
         // mysqli_stmt_bind_param($statement, 's', htmlspecialchars($_POST["role"]));
         if(mysqli_stmt_execute($statement)){
-            header("location: index.php");
+            header("location: add.php");
         }else{
             mysqli_error($conn);
         };
