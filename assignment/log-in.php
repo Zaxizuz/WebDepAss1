@@ -22,6 +22,15 @@
                 if($user[3]=="administrator"){
                   header("location: add.php");
                 }
+
+                else if($user[3] == "manager"){
+                  header("location: product-view.php");
+                }
+
+                else if($user[3] == "customer"){
+                  header("location: eCommerce.php");
+                }
+
             }else{
               echo "<div class='form'>
                     <h3>Incorrect Username or password.</h3><br/>

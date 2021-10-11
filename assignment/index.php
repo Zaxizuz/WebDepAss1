@@ -12,13 +12,16 @@
         <div class = container>
         </div>
         <div class=container id="tasklist">
-            <h1> Welcome to Content Management System</h1>
+            <h1> Welcome to content management system</h1>
             <p> Please enter your username and password</p>
+
+        
             <form action="log-in.php" method="POST">
               <input name="username" type="text" placeholder="Enter the username" required/>
               <input name="password" type="text" placeholder="Enter the password" required/>
               <input type="submit" value="Log in"/>
           </form>
+
         </div>
     </div>
 </body>
