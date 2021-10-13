@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="styles/style.css"/>
 </head>
 <body>
-    <div class=wrapper>
-        <div class = container>
-            <?php require_once "inc/menu.inc.php"; ?>
-        </div>
+<div class="container-menu">
+    <?php require_once "inc/menu.inc.php"; ?>
+</div>
+
+    <div class="wrapper">
         <div class=container id="userlist">
             <h1>Current User</h1>
             <?php
