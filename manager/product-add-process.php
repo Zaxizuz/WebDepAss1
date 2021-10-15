@@ -14,7 +14,7 @@
 
         mysqli_stmt_bind_param($statement, 'sss',$product_name , $price, $amount );
         if(mysqli_stmt_execute($statement)){
-            header("location: product-add.php");
+            header("location: product-view.php");
         }else{
             mysqli_error($conn);
         };
