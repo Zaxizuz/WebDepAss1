@@ -71,16 +71,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $confirm_password_err = "Password did not match.";
         }
     } 
+
+    // Validate role
+    if(empty(trim($_POST["role"]))){
+        $role_err = "Please enter a role.";
+    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["role"]))){
+        $role_err = "Roles can only contain letters, numbers, and underscores.";
+        }
+    
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($role)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO user (username, password, role) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO User (username, password, role) VALUES (?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password, $param_role );
+            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_role );
             
             // Set parameters
             $param_username = $username;
@@ -92,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Redirect to login page
                 header("location: login.php");
             } else{
-                echo "Oops! Something went wrong. Please try again later. 2s";
+                echo "Oops! Something went wrong. Please try again later. - Login Page";
             }
 
             // Close statement
@@ -138,11 +146,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" name="confirm_password"   <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
                 <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
           
+                
                 <label>Role</label>
-                <select name="role" id="role">
-                    <option value="administrator">Administrator</option>
-                    <option value="manager">Manager</option>
-                </select>
+                
+                <input type="text" name="role"  <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $role; ?>">
+                <span class="invalid-feedback"><?php echo $role_err; ?></span>
  
                 <input type="submit" value="Submit">
                 <input type="reset" value="Reset">
