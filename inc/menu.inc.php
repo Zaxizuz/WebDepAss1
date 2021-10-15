@@ -3,7 +3,7 @@
 </div>
 
 <a class="active" href="index.php">Dashboard</a>
-<a href="add-users.php">Add A User</a>
+<a href="register.php">Add A User</a>
+<a href="manage-product.php">Manage Products</a>
 <a href="manage-users.php">Manage Users</a>
 <a href="logout.php">Logout</a> 
- 
