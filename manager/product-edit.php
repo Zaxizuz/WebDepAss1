@@ -8,9 +8,13 @@
     <script src="scripts/script.js" defer></script>
 </head>
 <body>
+
+<div class="sidebar">
+    <?php require_once "inc/menu.inc.php"; ?>
+</div>
     <div class=wrapper>
         <div class = container>
-        <?php require_once "inc/product-menu.inc.php"; ?>
+         <?php require_once "inc/product-menu.inc.php"; ?>
         </div>
     
         <?php
@@ -23,7 +27,7 @@
          {
         $sql = "UPDATE Product SET product_name=?, price=?, amount=?, tag='edited', updated=now() where id=$id;";
         
-        $statement = mysqli_stmt_init($conn);
+        $statement = mysqli_stmt_init($link);
         mysqli_stmt_prepare($statement, $sql);
 
         $product_name = htmlspecialchars($_POST["product_name"]);
@@ -37,9 +41,9 @@
             header("location: manage-product.php");
         }
         else{
-            mysqli_error($conn);
+            mysqli_error($link);
         };
-        mysqli_close($conn);
+        mysqli_close($link);
     }
             ?>     
         <div class = container>
@@ -54,4 +58,3 @@
     </div>
 </body>
 </html>
-        
