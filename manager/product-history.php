@@ -66,6 +66,17 @@
                             </td>
                              </tr>";
                             }
+                        if($row['tag'] == 'edited'){
+                            echo "<tr>
+                            <td>" . $row['id'] . "</td>
+                            <td>" . $row['product_name'] . "</td>
+                            <td>" . $row['price']. "</td>
+                            <td>" . $row['amount'] . "</td>
+                            <td>
+                                Edited                        
+                            </td>
+                            </tr>";
+                                }
                     };
                     echo "</table>";
                     mysqli_free_result($result);
