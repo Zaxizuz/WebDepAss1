@@ -12,8 +12,8 @@
 require_once "inc/dbconn.inc.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $password = $confirm_password = $role = "";
+$username_err = $password_err = $confirm_password_err = $role_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -77,15 +77,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $role_err = "Please enter a role.";
     } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["role"]))){
         $role_err = "Roles can only contain letters, numbers, and underscores.";
-        }
+    }else{
+        $role = trim ($_POST["role"]);
+    }
     
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($role)){
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($role_err)){
         
         // Prepare an insert statement
         $sql = "INSERT INTO User (username, password, role) VALUES (?, ?, ?)";
-         
+        $stmt = mysqli_stmt_init($link); 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_role );
@@ -135,21 +137,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             
                 <label>Username</label>
-                <input type="text" name="username"  <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                <input type="text" name="username"  <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?> value="<?php echo $username; ?>">
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
                 
                 <label>Password</label>
-                <input type="password" name="password"  <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
+                <input type="password" name="password"  <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?> value="<?php echo $password; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             
                 <label>Confirm Password</label>
-                <input type="password" name="confirm_password"   <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
+                <input type="password" name="confirm_password"   <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?> value="<?php echo $confirm_password; ?>">
                 <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
           
                 
                 <label>Role</label>
                 
-                <input type="text" name="role"  <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $role; ?>">
+                <input type="text" name="role"  <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?> value="<?php echo $role; ?>">
                 <span class="invalid-feedback"><?php echo $role_err; ?></span>
  
                 <input type="submit" value="Submit">

@@ -11,6 +11,10 @@
 
 <body>
 
+<div class="sidebar">
+    <?php require_once "inc/menu.inc.php"; ?>
+</div>
+
     <div class=wrapper>
 
         <div class = container>
@@ -38,7 +42,7 @@
 
               
 
-            if($result=mysqli_query($conn,$sql)){
+            if($result=mysqli_query($link,$sql)){
                 if (mysqli_num_rows($result)>0){
                     while($row=mysqli_fetch_assoc($result)){
                         $id = $row['id'];
@@ -66,17 +70,18 @@
                             </td>
                              </tr>";
                             }
-                        if($row['tag'] == 'edited'){
-                            echo "<tr>
-                            <td>" . $row['id'] . "</td>
-                            <td>" . $row['product_name'] . "</td>
-                            <td>" . $row['price']. "</td>
-                            <td>" . $row['amount'] . "</td>
-                            <td>
-                                Edited                        
-                            </td>
-                            </tr>";
-                                }
+
+                            if($row['tag'] == 'edited'){
+                                echo "<tr>
+                                <td>" . $row['id'] . "</td>
+                                <td>" . $row['product_name'] . "</td>
+                                <td>" . $row['price']. "</td>
+                                <td>" . $row['amount'] . "</td>
+                                <td>
+                                    Edited                       
+                                </td>
+                                 </tr>";
+                                }    
                     };
                     echo "</table>";
                     mysqli_free_result($result);

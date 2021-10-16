@@ -5,7 +5,7 @@
         require_once "inc/dbconn.inc.php";
 
         $sql = "INSERT INTO Product(product_name,price,amount, tag) VALUES(?,?,?, 'added');";
-        $statement = mysqli_stmt_init($conn);
+        $statement = mysqli_stmt_init($link);
         mysqli_stmt_prepare($statement, $sql);
 
         $product_name = htmlspecialchars($_POST["product_name"]);
@@ -16,8 +16,8 @@
         if(mysqli_stmt_execute($statement)){
             header("location: manage-product.php");
         }else{
-            mysqli_error($conn);
+            mysqli_error($link);
         };
-        mysqli_close($conn);
+        mysqli_close($link);
     }
 ?>

@@ -101,13 +101,10 @@ h1 {
 }
  
 
-#menu a {
-    margin-right: 15px;
-    color: #021b2c;
+#menu a {  
     text-decoration: none;
     font-size: 15px;
-    font-weight: 900;  
-
+    font-weight: 300;  
 }
 
 ul#menu {
@@ -115,14 +112,13 @@ ul#menu {
   margin: 0;
 }
 
-
-
 #menu a:hover {
-  color: #1565c0;
+  background: #03192c;
+  color: #fff;
 }
 
 #menu a:active {
-  color: #1565c0;
+  color: #fff;
   font-weight: bold;
 }
 
@@ -225,6 +221,7 @@ input[type="reset"] {
 
 .container-logged {
   color: #fff;
+  margin-left: 200px;
 }
 
 
